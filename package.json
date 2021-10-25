@@ -1,0 +1,19 @@
+{
+  "name": "oct25",
+  "version": "1.0.0",
+  "description": "this is video showing website",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eric-lab-star/oct25.git"
+  },
+  "author": "Eric",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Eric-lab-star/oct25/issues"
+  },
+  "homepage": "https://github.com/Eric-lab-star/oct25#readme"
+}
