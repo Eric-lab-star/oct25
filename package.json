@@ -18,7 +18,9 @@
   "homepage": "https://github.com/Eric-lab-star/oct25#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "nodemon": "^2.0.14"
+    "mongoose": "^6.0.12",
+    "nodemon": "^2.0.14",
+    "pug": "^3.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
