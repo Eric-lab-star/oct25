@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const VideoSchema = mongoose.Schema({
+const VideoSchema = new mongoose.Schema({
   title: { type: String, max: 20 },
   createdAt: { type: Date, default: new Date() },
 });

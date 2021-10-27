@@ -2,7 +2,6 @@ import Video from "../models/Video";
 export const home = async (req, res) => {
   const videos = await Video.find().sort({ createdAt: "desc" });
   res.render("home", { pageTitle: "Home", videos });
-  console.log(videos);
   return;
 };
 
@@ -32,4 +31,32 @@ export const deleteVideo = async (req, res) => {
   await Video.findByIdAndDelete(id);
   res.redirect("/");
   return;
+};
+export const getEdit = async (req, res) => {
+  const { id } = req.params;
+  const video = await Video.findById(id);
+
+  res.render("edit", { pageTitle: "Edit Your Video", video });
+  return;
+};
+
+export const postEdit = async (req, res) => {
+  const {
+    body: { title },
+    params: { id },
+  } = req;
+
+  await Video.findByIdAndUpdate(id, {
+    title,
+  });
+  res.redirect("/");
+  return;
+};
+
+export const search = async (req, res) => {
+  const { keyword } = req.query;
+  const videos = await Video.find({
+    title: { $regex: `^${keyword}` },
+  });
+  res.render("search", { pageTitle: "Search", videos });
 };

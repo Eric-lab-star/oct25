@@ -1,8 +1,8 @@
 extends base
 
 block content
-    form(action="")
-        input(type="text", placeholder="Username", name="username", required)
-        input(type="text", placeholder="name", name="name", required)
-        input(type="Email", placeholder="Email", name="email", required) 
+    form(method="post")
+        input(type="text", placeholder="Username", name="username", value=user.username required)
+        input(type="text", placeholder="name", name="name", value=user.name, required)
+        input(type="Email", placeholder="Email", name="email", required, value=user.email) 
         input(type="submit", value="Edit Profile", required)

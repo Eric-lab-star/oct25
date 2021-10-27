@@ -1,7 +1,17 @@
 import express from "express";
-import { login } from "../controllers/userController";
-import { home } from "../controllers/videoController";
+import {
+  getLogin,
+  getJoin,
+  postJoin,
+  postLogin,
+  logout,
+} from "../controllers/userController";
+import { home, search } from "../controllers/videoController";
 const globalRouter = express.Router();
 globalRouter.get("/", home);
-globalRouter.get("/login", login);
+globalRouter.route("/login").get(getLogin).post(postLogin);
+globalRouter.get("/search", search);
+globalRouter.route("/join").get(getJoin).post(postJoin);
+globalRouter.get("/logout", logout);
+
 export default globalRouter;

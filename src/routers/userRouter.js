@@ -1,5 +1,5 @@
 import express from "express";
-import { profile } from "../controllers/userController";
+import { getEdit, postEdit } from "../controllers/userController";
 const userRouter = express.Router();
-userRouter.get("/profile", profile);
+userRouter.route("/:id([0-9a-f]{24})/profile").get(getEdit).post(postEdit);
 export default userRouter;

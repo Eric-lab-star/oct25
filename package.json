@@ -17,7 +17,11 @@
   },
   "homepage": "https://github.com/Eric-lab-star/oct25#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "connect-mongo": "^4.6.0",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "express-session": "^1.17.2",
     "mongoose": "^6.0.12",
     "nodemon": "^2.0.14",
     "pug": "^3.0.2"
