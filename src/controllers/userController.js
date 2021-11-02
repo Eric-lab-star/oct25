@@ -16,7 +16,9 @@ export const postJoin = async (req, res) => {
     return;
   }
 
-  const exists = await User.exists({ $or: [{ username }, { email }] });
+  const exists = await User.exists({
+    $or: [{ email }],
+  });
   if (exists) {
     res.render("join", {
       pageTitle: "Join",

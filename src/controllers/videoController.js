@@ -1,4 +1,5 @@
 import Video from "../models/Video";
+import User from "../models/User";
 export const home = async (req, res) => {
   const videos = await Video.find().sort({ createdAt: "desc" });
   res.render("home", { pageTitle: "Home", videos });
@@ -7,7 +8,7 @@ export const home = async (req, res) => {
 
 export const watch = async (req, res) => {
   const { id } = req.params;
-  const video = await Video.findById(id);
+  const video = await Video.findById(id).populate("user");
   res.render("watch", { pageTitle: `Watching ${video.title}`, video });
   return;
 };
@@ -17,11 +18,15 @@ export const getUpload = (req, res) => {
 };
 
 export const postUpload = async (req, res) => {
+  const { user } = req.session;
   const { title } = req.body;
   await Video.create({
     title,
+    user: user._id,
   });
+
   res.redirect("/");
+
   return;
 };
 
