@@ -18,13 +18,18 @@ export const getUpload = (req, res) => {
 };
 
 export const postUpload = async (req, res) => {
-  const { user } = req.session;
+  const {
+    user: { _id },
+  } = req.session;
   const { title } = req.body;
-  await Video.create({
+  const newVideo = await Video.create({
     title,
-    user: user._id,
+    user: _id,
   });
-
+  const user = await User.findById(_id);
+  user.videos.push(newVideo._id);
+  user.save();
+  req.session.user = user;
   res.redirect("/");
 
   return;

@@ -1,4 +1,5 @@
 import User from "../models/User";
+import Video from "../models/Video";
 import bcrypt from "bcrypt";
 
 export const getJoin = (req, res) => {
@@ -17,23 +18,22 @@ export const postJoin = async (req, res) => {
   }
 
   const exists = await User.exists({
-    $or: [{ email }],
+    $or: [{ email }, { name }, { username }],
   });
   if (exists) {
     res.render("join", {
       pageTitle: "Join",
-      errorMessage: "this username or email exists",
+      errorMessage: "Username or email or name exists",
     });
     return;
   }
-
   await User.create({
     username,
     name,
     password,
     email,
   });
-  return res.redirect("/");
+  return res.redirect("/login");
 };
 
 export const getLogin = (req, res) => {
@@ -70,8 +70,18 @@ export const logout = (req, res) => {
   res.redirect("/");
   return;
 };
+
+export const profile = async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id).populate("videos");
+  const videos = user.videos;
+  console.log(videos);
+  res.render("profile", { pageTitle: "Profile", user, videos });
+  return;
+};
+
 export const getEdit = (req, res) => {
-  res.render("profile", { pageTitle: "Edit Profile" });
+  res.render("editProfile", { pageTitle: `Edit Profile` });
   return;
 };
 
@@ -88,6 +98,6 @@ export const postEdit = async (req, res) => {
     { new: true }
   );
   req.session.user = updateuser;
-  res.redirect("/");
+  res.redirect("profile");
   return;
 };
