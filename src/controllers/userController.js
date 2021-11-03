@@ -75,7 +75,7 @@ export const profile = async (req, res) => {
   const { id } = req.params;
   const user = await User.findById(id).populate("videos");
   const videos = user.videos;
-  console.log(videos);
+
   res.render("profile", { pageTitle: "Profile", user, videos });
   return;
 };
@@ -98,6 +98,38 @@ export const postEdit = async (req, res) => {
     { new: true }
   );
   req.session.user = updateuser;
+  res.redirect("profile");
+  return;
+};
+
+export const getPassword = (req, res) => {
+  res.render("editPassword", { pageTitle: "Change Password" });
+  return;
+};
+
+export const postPassword = async (req, res) => {
+  const { password1, password2, oldPassword } = req.body;
+  const { id } = req.params;
+  const user = await User.findById(id);
+  if (oldPassword !== user.password) {
+    res.render("editPassword", {
+      pageTitle: "Change Password",
+      errorMessage: "confirm your new password again",
+    });
+    return;
+  }
+
+  if (password1 !== password2) {
+    res.render("editPassword", {
+      pageTitle: "Change Password",
+      errorMessage: "confirm your new passwrod again",
+    });
+    return;
+  }
+
+  user.password = password1;
+  user.save();
+  req.session.user = user;
   res.redirect("profile");
   return;
 };
