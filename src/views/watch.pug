@@ -1,6 +1,7 @@
 extends base
 
 block content
+    video(src="/" + video.fileUrl, width=500, height=500, controls)
     h3 #{video.title}
     span #{video.createdAt}
     br

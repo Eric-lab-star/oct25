@@ -1,13 +1,17 @@
 extends base
 include mixins/video.pug
 block content
-    h1 Your Profile
+    h2 Your Avatar
+    img(src="/" + user.avatarUrl)
     h2 username: #{user.username}
     h2  name: #{user.name}
     h2 email: #{user.email}
+    h2 Your Videos
+
     each video in videos 
         +video(video)
     else 
-        span no videos
-    hr
-    a(href="editProfile") Edit profile &rarr;
+        h2 no video Uploaded
+    
+    div
+        a(href="editProfile") Edit profile &rarr;

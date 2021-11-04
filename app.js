@@ -19,6 +19,7 @@ app.use(
   })
 );
 app.use(localsMiddleware);
+app.use("/uploads", express.static("uploads"));
 app.use(express.urlencoded({ extended: true }));
 app.set("views", process.cwd() + "/src/views");
 app.set("view engine", "pug");
